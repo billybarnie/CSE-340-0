@@ -125,7 +125,7 @@ div #text-overlay { /* placeholder color*/
   
   html {
     background-image: url(/images/site/small_check.jpg);
-
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   body {
