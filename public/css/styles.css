@@ -124,7 +124,7 @@ div #text-overlay { /* placeholder color*/
 @media (min-width: 501px) {
   
   html {
-    background-image: url(/images/site/small_check.jpg);
+    background-image: url(/images/site/checkerboard.jpg);
     font-family: Arial, Helvetica, sans-serif;
   }
 
@@ -132,7 +132,7 @@ div #text-overlay { /* placeholder color*/
     background-color: white;
     margin: 100px;
     height: auto;
-    border: 5px solid var(--accent-color);
+    border: 2px solid var(--accent-color);
     border-radius: 5px;
   }
 
