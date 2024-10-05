@@ -41,7 +41,7 @@ Util.buildClassificationGrid = async function(data){
         grid += '<div class="namePrice">'
         grid += '<hr />'
         grid += '<h2>'
-        grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
+        grid += '<a class="invlist" href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
         + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
         + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
         grid += '</h2>'
@@ -60,9 +60,24 @@ Util.buildClassificationGrid = async function(data){
 Util.buildVehicleDetailData = async function(data) {
   let detail
     if(data.length > 0) {
-      detail = '<div class="vehicle-display"> </div>'
+
+      detail = '<div class="vehicle-display"> '
+      let image = data[0].inv_image
+      detail += '<img src="../..' + image + '"/>'
+
       data.forEach(vehicle => {
-        detail += '<img src="' + vehicle.inv_image
+        detail += `<section class="pricing">
+        <section>
+        <h3>NO interest NO haggled price $${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</h3>
+        <div class="miles">Mileage: ${vehicle.inv_miles.toLocaleString()} ODO</div>
+        <p id="docFee"> does not include our $100 Dealer Documentary Service Fee.</p>
+        </section>
+          <p>Miles: ${vehicle.inv_miles.toLocaleString()}</p>
+          <p>Interior Color: N/A </p>
+          <p>Exterior Color: ${vehicle.inv_color} </p>
+          <p>Description: ${vehicle.inv_description} </p>
+        </section>   
+        </div>`
 
       })
     }

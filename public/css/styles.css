@@ -12,11 +12,16 @@
 html {
   background-color: white;
   background-size: contain;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
   background-color: white;
   margin: 0;
+}
+
+h1 {
+  text-align: center;
 }
 
 #top-header {
@@ -40,12 +45,16 @@ header div#tools {
 
 nav {
   background-color: #444;
+  width: 95%;
+  margin: 2% auto;
 }
 
 nav ul {
   padding-left: 0;
   list-style: none;
   text-align: center;
+  display: flex;
+  justify-content: space-around;
 }
 
 nav li {
@@ -53,6 +62,11 @@ nav li {
   color: white;
   display: inline-block;
   justify-content: center;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--accent-color);
 }
 
 div #delor{
@@ -69,6 +83,8 @@ div #text-overlay { /* placeholder color*/
   position: absolute;
   top: 50px;
   z-index: 1;
+  left: 150px;
+  top: 50px;
 }
 
 #text-overlay h3 {
@@ -119,9 +135,82 @@ div #text-overlay { /* placeholder color*/
   max-width: 150px;
   height: 100px; 
 }
-/*  */
 
-@media (min-width: 501px) {
+.vehicle-display {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 40px auto;
+  gap: 20px;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid#b0b0b0;
+  margin: 20px;
+  border-radius: 5px;
+  background-color: #d4d4d475;
+  box-shadow: 0px 5px 5px var(--accent-color);
+}
+
+.vehicle-display img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    padding: 20px;
+}
+
+#inv-display {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  list-style: none;
+  padding: 20px;
+}
+
+#inv-display img {
+  width: 100%;
+  height: auto;
+}
+
+#inv-display li {
+  list-style-type: none;
+  padding: 20px;
+  margin: 10px 0;
+  border: #000;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0px 5px 5px var(--accent-color);
+}
+
+#inv-display h3 {
+  text-align: center;
+}
+
+.invlist {
+  padding: 5px;
+  background-color: #444;
+  color: white;
+  border: darkblue solid 1px;
+  text-decoration: none;
+}
+
+.invlist:hover {
+  background-color: #466;
+
+}
+
+.error {
+  align-items: center;
+  text-align: center;
+  width: 80%;
+  margin: 2% auto;
+}
+
+.error img {
+  width: 80%;
+  height: auto;
+}
+
+@media (min-width: 901px) {
   
   html {
     background-image: url(/images/site/checkerboard.jpg);
@@ -140,27 +229,25 @@ div #text-overlay { /* placeholder color*/
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
-}
+  }
 
   .upgrade {
-      order: 1; /* Ensure upgrade is on the left */
-      flex: 0 0 45%; /* Upgrade section takes 45% of the width */
-      align-items: left;
+      order: 1; 
+      flex: 0 0 45%;
   }
 
   .review {
-      order: 2; /* Ensure review is on the right */
-      flex: 0 0 45%; /* Review section takes 45% of the width */
-      align-items: left;
+      order: 2;
+      flex: 0 0 45%; 
   }
 
   .review ul {
-    padding: 0; /* Reset padding for the ul */
-    margin: 0; /* Reset margin for the ul */
+    padding: 0;
+    margin: 0;
   }
 
   .review ul li {
-    margin: 20px 0; /* Add vertical margin between list items */
+    margin: 20px 0;
   }
 
   div #delor{
@@ -170,6 +257,22 @@ div #text-overlay { /* placeholder color*/
   .upgrade h3, .review h3 {
     margin-left: 20px;
   }
+  .vehicle-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .vehicle-display img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+  }
+
+  #inv-display {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
 }
 
 @media (max-width: 500px) {
@@ -182,4 +285,5 @@ div #text-overlay { /* placeholder color*/
   span.image-container {
     padding: 10px 25px 10px 25px;
   }
+
 }
