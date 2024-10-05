@@ -57,6 +57,17 @@ Util.buildClassificationGrid = async function(data){
     return grid
 }
   
+Util.buildVehicleDetailData = async function(data) {
+  let detail
+    if(data.length > 0) {
+      detail = '<div class="vehicle-display"> </div>'
+      data.forEach(vehicle => {
+        detail += '<img src="' + vehicle.inv_image
+
+      })
+    }
+    return detail
+}
   /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
