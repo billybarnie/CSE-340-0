@@ -83,8 +83,7 @@ div #text-overlay { /* placeholder color*/
   position: absolute;
   top: 50px;
   z-index: 1;
-  left: 150px;
-  top: 50px;
+  left: 20px;
 }
 
 #text-overlay h3 {
@@ -223,6 +222,11 @@ div #text-overlay { /* placeholder color*/
     height: auto;
     border: 2px solid var(--accent-color);
     border-radius: 5px;
+  }
+
+  div #text-overlay {
+    left: 150px;
+    top: 50px;
   }
 
   .info-container {
