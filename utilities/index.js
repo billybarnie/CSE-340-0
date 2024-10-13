@@ -83,6 +83,21 @@ Util.buildVehicleDetailData = async function(data) {
     }
     return detail
 }
+
+Util.buildManagement = async function (data) {
+  let detail 
+  
+  if(data.length > 0) {
+    detail = 'my mom'
+    data.forEach(table => {
+      const link = `/inv/${table.name}`
+      detail += `<a href="${link}"><button>${table}</button></a>`
+      
+    })
+  }
+  return detail
+}
+
   /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
