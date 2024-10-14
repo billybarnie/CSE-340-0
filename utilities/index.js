@@ -97,7 +97,7 @@ Util.buildManageGrid = async function(data){
     <li>
       <div class="management-card">
         <h2>${capitalizeFirstLetter(databaseTables.table_name)}</h2>
-        <img src="/images/site/edit-icon.svg">
+        <img src="/images/site/edits.webp">
         <a href="/inv/add-${databaseTables.table_name}" title="Add a ${capitalizeFirstLetter(databaseTables.table_name)} table">
           Add record to ${capitalizeFirstLetter(databaseTables.table_name)}
         </a>

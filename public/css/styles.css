@@ -254,6 +254,200 @@ button {
   text-align: center;
 }
 
+
+.invforms {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.invforms label {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.invforms input,
+.invforms textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.invforms input:focus,
+.invforms textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.invforms textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.invsubmit {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.invsubmit:hover {
+  background-color: #0056b3;
+}
+
+.notice {
+  list-style: none;
+  padding: 10px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.notice li {
+  margin-bottom: 5px;
+}
+
+.invinformation {
+  width: 40%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 5px 5px var(--accent-color);
+}
+
+#management-cards {
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.management-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  max-width: 300px;
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-between; 
+  box-shadow: 0px 5px 5px var(--accent-color);
+}
+
+.management-card h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.management-card img {
+  width: 100px;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  justify-content: center;
+}
+
+.management-card a {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.management-card a:hover {
+  background-color: #0056b3;
+}
+
+.management-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 5px var(--accent-color);
+}
+
+#management-cards {
+  flex-direction: column; 
+  align-items: center;
+}
+
+.management-card {
+    width: 90%;
+    max-width: none; 
+}
+
+.classification-form {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 5px 5px var(--accent-color);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.form-submit {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-submit:hover {
+  background-color: #0056b3;
+}
+
+
 @media (min-width: 901px) {
   
   html {
@@ -322,6 +516,15 @@ button {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
+  #management-cards {
+    flex-direction: row; /* Row layout */
+    align-items: flex-start; /* Align cards at the start */
+  }
+
+  .management-card {
+      flex: 1; /* Allow cards to grow equally */
+      margin: 10px; /* Optional spacing around cards */
+  }
 }
 
 @media (max-width: 500px) {
