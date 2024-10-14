@@ -1,13 +1,19 @@
 <% if (title) { %>
-    <h1><%= title %></h1>
-<%} else {
-    res.redirect('/')
-} %> 
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
     <%- messages() %>
-
-<form action="/add-classification" method="POST">
-    <label for="classificationName">Classification Name:</label>
-    <input type="text" id="classificationName" name="classificationName" required value="<%= locals.classification_name %>">
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+<form action="/inv/add-classification" method="POST">
+    <label for="classification_name">Classification Name:</label>
+    <input type="text" id="classification_name" name="classification_name" required>
     
 
     <button type="submit">Add Classification</button>

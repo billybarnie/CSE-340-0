@@ -1,6 +1,11 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
 
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -84,18 +89,35 @@ Util.buildVehicleDetailData = async function(data) {
     return detail
 }
 
-Util.buildManagement = async function (data) {
-  let detail 
-  
-  if(data.length > 0) {
-    detail = 'my mom'
-    data.forEach(table => {
-      const link = `/inv/${table.name}`
-      detail += `<a href="${link}"><button>${table}</button></a>`
-      
-    })
-  }
-  return detail
+Util.buildManageGrid = async function(data){
+  let grid
+  grid = '<ul id=management-cards>'
+  data.forEach(databaseTables => {
+    grid += `
+    <li>
+      <div class="management-card">
+        <h2>${capitalizeFirstLetter(databaseTables.table_name)}</h2>
+        <img src="/images/site/edit-icon.svg">
+        <a href="/inv/add-${databaseTables.table_name}" title="Add a ${capitalizeFirstLetter(databaseTables.table_name)} table">
+          Add record to ${capitalizeFirstLetter(databaseTables.table_name)}
+        </a>
+      </div>
+    </li>
+  `;
+  })
+  grid += '</ul>'
+  return grid
+}
+
+
+Util.buildClassification = async function(data){
+  let dropdown
+  dropdown = '<select name="classification_id" id="classification_id">'
+  data.rows.forEach(row => {
+    dropdown += '<option value="' + row.classification_id + '">' + row.classification_name + '</option>'
+  })
+  dropdown += '</select>'
+  return dropdown
 }
 
   /* ****************************************
