@@ -121,10 +121,12 @@ validate.checkLoginData = async (req, res, next) => {
   errors = validationResult(req);
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
+    const tools = await utilities.getHeaderTools(req, res)
     res.render("account/login", {
       errors,
       title: "Login",
       nav,
+      tools,
       account_email,
     });
     return;

@@ -129,12 +129,6 @@ async function accountLogin(req, res) {
     res.redirect("/")
   }
   
-  async function logout(req, res) {
-    res.clearCookie("jwt");
-    req.flash("notice", "You have been logged out.");
-    res.redirect("/");
-  }
-  
   async function buildUpdateAccount(req, res) {
     let nav = await utilities.getNav();
     const tools = await utilities.getHeaderTools(req, res);
