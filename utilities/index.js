@@ -151,5 +151,36 @@ Util.checkJWTToken = (req, res, next) => {
    next()
   }
 }
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+}
+
+/* ************************
+  * Constructs the header and checks for authentication or not
+  ************************** */
+
+Util.getHeaderTools = async function (req, res, next) {
+  let header;
+  
+  if (res.locals.loggedin) {
+    header = '<ul id="header-tools">';
+    header += '<li><a href="/account/logout" title="Logout of your account">Logout</a></li>';
+    header += '<li><a href="/account/" title="View your profile">Welcome ' + res.locals.accountData.account_firstname + '</a></li>';
+    header += '</ul>';
+  } else {
+    header = '<a href="/account/login" title="My Account">My Account</a>';
+  }
+
+  return header;
+};
   
 module.exports = Util

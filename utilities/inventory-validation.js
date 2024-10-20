@@ -34,10 +34,13 @@ validate.checkClassData = async (req, res, next) => {
     errors = validationResult(req);
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav();
+        const tools = await utilities.getHeaderTools(req, res)
         res.render("./inventory/add-classification", {
             errors,
             title: "Add New Classification",
             nav,
+            tools,
+            errors,
             classification_name,
         });
         return;
@@ -101,5 +104,32 @@ validate.InventoryRules = () => {
     next();
   };
   
+  validate.checkUpdateData = async (req, res, next) => {
+    const { inv_id, inv_make, inv_model,inv_miles, inv_color, inv_price, classification_id,inv_year, inv_description } = req.body;
+    let errors = [];
+    errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      let nav = await utilities.getNav();
+      let data = await invModel.getClassifications();
+      let classifications = await utilities.buildClassification(data);
+      res.edit("inventory/edit-inventory", {
+        title: "Edit Inventory",
+        nav,
+        errors,
+        inv_id,
+        inv_description,
+        inv_year,
+        inv_miles,
+        inv_make,
+        inv_model,
+        inv_color,
+        inv_price,
+        classification_id,
+        classifications,
+      });
+      return;
+    }
+    next();
+  };
 
 module.exports = validate;

@@ -76,12 +76,14 @@ app.use(static)
 *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
+  const tools = await utilities.getHeaderTools(req, res)
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
   if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route? '}
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
-    nav
+    nav,
+    tools
   })
 })
 
