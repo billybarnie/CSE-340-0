@@ -13,7 +13,7 @@ require("dotenv").config()
 async function buildLogin(req, res, next) {
     let nav = await utilities.getNav()
     const tools = await utilities.getHeaderTools(req, res)
-    res.render("./account/login", {
+    res.render("account/login", {
       title: "Login",
       nav,
       tools,
@@ -122,13 +122,30 @@ async function accountLogin(req, res) {
    return new Error('Access Forbidden')
   }
  }
+
+async function buildManagement(req, res){
+let nav = await utilities.getNav()
+const accountData = await accountModel.getAccountById(res.locals.accountData.account_id)
+res.locals.accountData.account_firstname = accountData.account_firstname
+const tools = await utilities.getHeaderTools(req, res)
+let grid = await utilities.buildManageGrid(res)
+res.render("./inventory/management", {
+  title: "Account Management",
+  nav,
+  tools,
+  name: accountData.account_firstname,
+  grid,
+  errors: null
+})
+
+}
   
   async function logout(req, res){
     res.clearCookie("jwt")
     req.flash("notice", "You have been logged out.")
     res.redirect("/")
   }
-  
+
   async function buildUpdateAccount(req, res) {
     let nav = await utilities.getNav();
     const tools = await utilities.getHeaderTools(req, res);
@@ -208,4 +225,4 @@ async function accountLogin(req, res) {
     }
   }
 
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, logout, buildUpdateAccount, updateAccount, updateAccountPassword }
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, logout, buildUpdateAccount, updateAccount, updateAccountPassword, buildManagement }
