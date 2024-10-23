@@ -16,6 +16,7 @@
             </ul>
     <% } %>
 
+
     <form action="/account/update/<%= locals.account_id %>" method="post">
         <input type="hidden" name="account_id"
 
@@ -37,7 +38,7 @@
             <label for="account_email">Email</label>
             <input type="email" id="account_email" name="account_email" required value= "<%= locals.account_email %>">
         </div>
-        <button type="submit">Update Account</button>
+        <button id="subbut" type="submit">Update Account</button>
 
     </form>
     
@@ -49,14 +50,14 @@
 
     <form action="/account/change-password/<%= locals.account_id %>" method="post">
 
-        <div class="tooltip">
+        <div class="personal-info">
 
             <input type="hidden" name="account_id"
 
             <% if(locals.account_id) { %> value="<%= locals.account_id %>"
 
                 <% } %>>
-            <div class="form-group password-group">
+            <div class="info-group update-password-group">
 
                 <p>If you enter a password here is will change you current password</p>
                 <label for="account_password">Password</label>
@@ -64,7 +65,7 @@
                 <input type="password" id="account_password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
                 <span id="toggle-password" class="toggle-password">Show</span>
 
-                <span class="tooltiptext"><p>Your Password Should Contain the Following</p>
+                <span class="password-requirements"><p>Your Password Should Contain the Following</p>
                 <ul>
                     <li>At least 12 characters</li>
                     <li>At least 1 uppercase letter</li>
@@ -74,7 +75,7 @@
                 </span>
             </div>
         </div>
-            <button type="submit">Update Password</button>
+            <button id="subbut" type="submit">Update Password</button>
     </form>
 </div>
 

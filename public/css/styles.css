@@ -447,7 +447,50 @@ button {
   background-color: #0056b3;
 }
 
+.management-card {
+  margin: 0 auto;
+}
 
+#welcome-header {
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 600px;
+  box-sizing: border-box;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.form h1,
+.form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  margin: 0 auto;
+}
+
+#subbut {
+  background-color: #007bff;
+  color: white; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 16px;
+  transition: background-color 0.3s;
+  margin: 10px 0;
+}
+#tools ul {
+  list-style-type: none;
+}
 @media (min-width: 901px) {
   
   html {
@@ -517,13 +560,19 @@ button {
   }
 
   #management-cards {
-    flex-direction: row; /* Row layout */
-    align-items: flex-start; /* Align cards at the start */
+    flex-direction: row;
+    align-items: flex-start;
   }
 
   .management-card {
-      flex: 1; /* Allow cards to grow equally */
-      margin: 10px; /* Optional spacing around cards */
+      flex: 1;
+      margin: 10px;
+  }
+
+  .form {
+    border: 1px;
+    border-radius: 8px;
+    box-shadow: 0px 5px 5px var(--accent-color);
   }
 }
 

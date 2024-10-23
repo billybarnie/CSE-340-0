@@ -121,6 +121,31 @@ Util.buildClassification = async function(data){
   return dropdown
 }
 
+Util.buildAccountManagementGrid = async function(res){
+  let grid = `
+  <ul id="management-cards">
+    <li>
+      <div class="management-card">
+        <h2>Update Account Information</h2>
+        <img src="/images/site/edits.webp" alt="Edit Icon">
+        <a href="/account/update/${res.locals.accountData.account_id}" title="Update Account Information">
+          Update Account Information
+        </a>
+      </div>
+    </li>
+  </ul>
+  ${res.locals.management ? `
+    <li>
+      <div class="management-card">
+        <h2>Manage Inventory</h2>
+        <img src="/images/site/edit-icon.svg" alt="Manage Inventory Icon">
+        <a href="/inv/" title="Manage Inventory">Manage Inventory</a>
+      </div>
+    </li>` : ''}
+  </ul>
+`;
+    return grid
+}
   /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

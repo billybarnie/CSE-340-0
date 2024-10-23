@@ -128,8 +128,8 @@ let nav = await utilities.getNav()
 const accountData = await accountModel.getAccountById(res.locals.accountData.account_id)
 res.locals.accountData.account_firstname = accountData.account_firstname
 const tools = await utilities.getHeaderTools(req, res)
-let grid = await utilities.buildManageGrid(res)
-res.render("./inventory/management", {
+let grid = await utilities.buildAccountManagementGrid(res)
+res.render("./account/management", {
   title: "Account Management",
   nav,
   tools,
@@ -140,89 +140,89 @@ res.render("./inventory/management", {
 
 }
   
-  async function logout(req, res){
-    res.clearCookie("jwt")
-    req.flash("notice", "You have been logged out.")
-    res.redirect("/")
-  }
+async function logout(req, res){
+  res.clearCookie("jwt")
+  req.flash("notice", "You have been logged out.")
+  res.redirect("/")
+}
 
-  async function buildUpdateAccount(req, res) {
-    let nav = await utilities.getNav();
-    const tools = await utilities.getHeaderTools(req, res);
-    const accountData = await accountModel.getAccountById(req.params.id);
-  
-    if (!accountData) {
-      req.flash("notice", "Please check your credentials and try again.");
-      res.status(400).render("account/login", {
-        title: "Login",
-        nav,
-        tools,
-        errors: null,
-        account_email,
-      });
-      return;
-    }
-  
-    res.render("account/edit-logged", {
-      title: "Update Account Information",
+async function buildUpdateAccount(req, res) {
+  let nav = await utilities.getNav();
+  const tools = await utilities.getHeaderTools(req, res);
+  const accountData = await accountModel.getAccountById(req.params.id);
+
+  if (!accountData) {
+    req.flash("notice", "Please check your credentials and try again.");
+    res.status(400).render("account/login", {
+      title: "Login",
       nav,
       tools,
-      account_email: accountData.account_email,
+      errors: null,
+      account_email,
+    });
+    return;
+  }
+
+  res.render("account/edit-logged", {
+    title: "Update Account Information",
+    nav,
+    tools,
+    account_email: accountData.account_email,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_id: req.params.id,
+    errors: null,
+  });
+}
+
+async function updateAccount(req, res) {
+  let nav = await utilities.getNav();
+  const tools = await utilities.getHeaderTools(req, res);
+  const { account_id, account_firstname, account_lastname, account_email } = req.body;
+  const result = await accountModel.updateAccount(account_id, account_firstname, account_lastname, account_email);
+
+  if (result) {
+    req.flash("notice", "Account updated successfully");
+    res.redirect("/account/");
+  } else {
+    req.flash("notice", "Sorry, there was an error updating the account");
+    res.redirect("/account/update/" + account_id);
+  }
+}
+
+async function updateAccountPassword(req, res) {
+  let nav = await utilities.getNav();
+  const tools = await utilities.getHeaderTools(req, res);
+  const { account_id, account_password } = req.body;
+  let hashedPassword;
+
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10);
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the registration.');
+    const accountData = await accountModel.getAccountById(account_id);
+    res.status(500).render("account/edit-logged/" + account_id, {
+      title: "Update Account Information ",
+      nav,
+      tools,
       account_firstname: accountData.account_firstname,
       account_lastname: accountData.account_lastname,
-      account_id: req.params.id,
+      account_email: accountData.account_email,
+      account_id,
       errors: null,
     });
   }
-  
-  async function updateAccount(req, res) {
-    let nav = await utilities.getNav();
-    const tools = await utilities.getHeaderTools(req, res);
-    const { account_id, account_firstname, account_lastname, account_email } = req.body;
-    const result = await accountModel.updateAccount(account_id, account_firstname, account_lastname, account_email);
-  
-    if (result) {
-      req.flash("notice", "Account updated successfully");
-      res.redirect("/account/");
-    } else {
-      req.flash("notice", "Sorry, there was an error updating the account");
-      res.redirect("/account/update/" + account_id);
-    }
+
+  const result = await accountModel.updateAccountPassword(account_id, hashedPassword);
+
+  if (result) {
+    req.flash("notice", "Password Changed successfully");
+    res.redirect("/account/");
+  } else {
+    req.flash("notice", "Sorry, there was an error updating the account");
+    res.redirect("/account/update/" + account_id);
   }
-  
-  async function updateAccountPassword(req, res) {
-    let nav = await utilities.getNav();
-    const tools = await utilities.getHeaderTools(req, res);
-    const { account_id, account_password } = req.body;
-    let hashedPassword;
-  
-    try {
-      // regular password and cost (salt is generated automatically)
-      hashedPassword = await bcrypt.hashSync(account_password, 10);
-    } catch (error) {
-      req.flash("notice", 'Sorry, there was an error processing the registration.');
-      const accountData = await accountModel.getAccountById(account_id);
-      res.status(500).render("account/edit-logged/" + account_id, {
-        title: "Update Account Information ",
-        nav,
-        tools,
-        account_firstname: accountData.account_firstname,
-        account_lastname: accountData.account_lastname,
-        account_email: accountData.account_email,
-        account_id,
-        errors: null,
-      });
-    }
-  
-    const result = await accountModel.updateAccountPassword(account_id, hashedPassword);
-  
-    if (result) {
-      req.flash("notice", "Password Changed successfully");
-      res.redirect("/account/");
-    } else {
-      req.flash("notice", "Sorry, there was an error updating the account");
-      res.redirect("/account/update/" + account_id);
-    }
-  }
+}
 
   module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, logout, buildUpdateAccount, updateAccount, updateAccountPassword, buildManagement }
