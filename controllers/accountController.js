@@ -40,8 +40,9 @@ async function buildRegister(req, res, next) {
 * *************************************** */
 async function registerAccount(req, res) {
     let nav = await utilities.getNav()
+    const tools = await utilities.getHeaderTools(req, res)
     const { account_firstname, account_lastname, account_email, account_password } = req.body
-  
+
     // Hash the password before storing
     let hashedPassword
     try {
@@ -52,6 +53,7 @@ async function registerAccount(req, res) {
         res.status(500).render("account/register", {
         title: "Registration",
         nav,
+        tools,
         errors: null,
         })
     }
@@ -71,6 +73,7 @@ async function registerAccount(req, res) {
       res.status(201).render("account/login", {
         title: "Login",
         nav,
+        tools,
         errors: null,
       })
     } else {
@@ -78,6 +81,7 @@ async function registerAccount(req, res) {
       res.status(501).render("account/register", {
         title: "Registration",
         nav,
+        tools,
         errors: null,
       })
     }
