@@ -88,6 +88,7 @@ validate.InventoryRules = () => {
       res.render("inventory/add-inventory", {
         title: "Add Inventory",
         nav,
+        tools,
         errors,
         inv_description,
         inv_year,
@@ -115,6 +116,7 @@ validate.InventoryRules = () => {
       res.edit("inventory/edit-inventory", {
         title: "Edit Inventory",
         nav,
+        tools,
         errors,
         inv_id,
         inv_description,
