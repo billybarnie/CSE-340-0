@@ -261,7 +261,7 @@ invCont.deleteInventory = async function (req, res, next) {
 }
 
 invCont.searchVehicles = async (req, res) => {
-  const searchTerm = req.query.q; // Assuming the search query is passed via query parameter
+  const searchTerm = req.query.q;
   try {
     const results = await invModel.searchVehiclesByTerm(searchTerm);
     const nav = await utilities.getNav();
