@@ -206,5 +206,25 @@ Util.getHeaderTools = async function (req, res, next) {
 
   return header;
 };
+
+Util.buildSearchResultsGrid = async function (data) {
+  let grid = "<ul>";
+  if (data.length > 0) {
+    data.forEach(vehicle => {
+      grid += `
+        <li>
+          <a href="/inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
+            <img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}">
+          </a>
+          <h2>${vehicle.inv_make} ${vehicle.inv_model}</h2>
+          <span>$${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</span>
+        </li>`;
+    });
+  } else {
+    grid += "<p>No matching vehicles found.</p>";
+  }
+  grid += "</ul>";
+  return grid;
+};
   
 module.exports = Util

@@ -55,11 +55,25 @@ app.use(cookieParser())
 app.use(utilities.checkJWTToken)
 
 /* ***********************
+ * Search Validation Middleware
+ * *************************/
+function validateSearch(req, res, next) {
+  const searchTerm = req.query.q;
+  if (!searchTerm || searchTerm.trim().length === 0) {
+    req.flash('error', 'Search term cannot be empty');
+    return res.redirect("/");
+  }
+  next();
+}
+
+/* ***********************
  * Routes
  *************************/
 app.use(static)
   //index
   app.get("/", utilities.handleErrors(baseController.buildHome))
+  // Inventory Search Route with Search Validation Middleware
+  app.get("/inv/search", validateSearch, utilities.handleErrors(inventoryRoute))
   // Inventory routes
   app.use("/inv", inventoryRoute)
   //account route

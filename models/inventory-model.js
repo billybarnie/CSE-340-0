@@ -133,4 +133,15 @@ async function deleteInventory(inv_id) {
   }
 }
 
-  module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByVehicleID, getInventoryDatabaseTables, checkClassificationExists,addNewClass,addInv, updateInventory, deleteInventory}
+async function searchVehiclesByTerm(searchTerm) {
+  try {
+    const sql = "SELECT * FROM vehicles WHERE inv_make LIKE $1";
+    const data = await pool.query(sql, [`%${searchTerm}%`]);
+    return data.rows;
+  } catch (error) {
+    console.error("Error searching for vehicles", error);
+    throw error;
+  }
+}
+
+  module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByVehicleID, getInventoryDatabaseTables, checkClassificationExists,addNewClass,addInv, updateInventory, deleteInventory, searchVehiclesByTerm}

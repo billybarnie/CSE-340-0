@@ -260,4 +260,23 @@ invCont.deleteInventory = async function (req, res, next) {
   }
 }
 
+invCont.searchVehicles = async (req, res) => {
+  const searchTerm = req.query.q; // Assuming the search query is passed via query parameter
+  try {
+    const results = await invModel.searchVehiclesByTerm(searchTerm);
+    const nav = await utilities.getNav();
+    const searchResultsHTML = await utilities.buildSearchResultsGrid(results);
+    
+    res.render("inventory/search-results", {
+      title: "Search Results",
+      nav,
+      searchResultsHTML,
+      errors: null,
+    });
+  } catch (error) {
+    console.error("Error processing search", error);
+    res.status(500).render("errors/error", { message: "Server error", nav });
+  }
+};
+
 module.exports = invCont
