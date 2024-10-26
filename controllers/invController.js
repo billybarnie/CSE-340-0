@@ -265,11 +265,13 @@ invCont.searchVehicles = async (req, res) => {
   try {
     const results = await invModel.searchVehiclesByTerm(searchTerm);
     const nav = await utilities.getNav();
+    const tools = await utilities.getHeaderTools(req, res);
     const searchResultsHTML = await utilities.buildSearchResultsGrid(results);
     
     res.render("inventory/search-results", {
       title: "Search Results",
       nav,
+      tools,
       searchResultsHTML,
       errors: null,
     });

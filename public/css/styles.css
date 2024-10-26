@@ -488,9 +488,51 @@ form {
   transition: background-color 0.3s;
   margin: 10px 0;
 }
+
 #tools ul {
   list-style-type: none;
 }
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: center;
+  padding: 0 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.result {
+  list-style: none;
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 5px 5px var(--accent-color);
+}
+
+.result img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.result h2 {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.result span {
+  display: block;
+  font-size: 1em;
+  font-weight: bold;
+  color: #333;
+}
+
 @media (min-width: 901px) {
   
   html {

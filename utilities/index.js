@@ -208,11 +208,11 @@ Util.getHeaderTools = async function (req, res, next) {
 };
 
 Util.buildSearchResultsGrid = async function (data) {
-  let grid = "<ul>";
+  let grid = `<ul class="result-grid">`;
   if (data.length > 0) {
     data.forEach(vehicle => {
       grid += `
-        <li>
+        <li class="result">
           <a href="/inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
             <img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}">
           </a>
